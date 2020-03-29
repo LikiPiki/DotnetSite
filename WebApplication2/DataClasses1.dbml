@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="mybd" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=DESKTOP-VL8NJ7F;Initial Catalog=mybd;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="mybdConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.tracks" Member="tracks">
+    <Type Name="tracks">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="индификатор_почтового_отправления" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="индификатор_пользователя" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="users_tracks" Member="users" ThisKey="индификатор_пользователя" OtherKey="id" Type="users" IsForeignKey="true" />
+      <Association Name="Почтовые_отправления_tracks" Member="Почтовые_отправления" ThisKey="id" OtherKey="номер_почтового_отправления" Type="Почтовые_отправления" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.users" Member="users">
+    <Type Name="users">
+      <Column Name="username" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="isAdmin" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Association Name="users_tracks" Member="tracks" ThisKey="id" OtherKey="индификатор_пользователя" Type="tracks" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Зарплаты" Member="Зарплаты">
+    <Type Name="Зарплаты">
+      <Column Name="номер_сотрудника" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="индификатор_склада" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ФИО" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Должность" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Оклад" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Извещения" Member="Извещения">
+    <Type Name="Извещения">
+      <Column Name="идентификатор_извещения" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="номер_извещения" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="дата" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="время" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Извещения_имеют" Member="имеют" ThisKey="идентификатор_извещения" OtherKey="индификатор_извещения" Type="имеют" />
+      <Association Name="Извещения_Связующая" Member="Связующая" ThisKey="идентификатор_извещения" OtherKey="индификатор_извещения" Type="Связующая" />
+    </Type>
+  </Table>
+  <Table Name="dbo.имеют" Member="имеют">
+    <Type Name="имеют">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="номер_почтового_отправления" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="индификатор_извещения" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Извещения_имеют" Member="Извещения" ThisKey="индификатор_извещения" OtherKey="идентификатор_извещения" Type="Извещения" IsForeignKey="true" />
+      <Association Name="Почтовые_отправления_имеют" Member="Почтовые_отправления" ThisKey="номер_почтового_отправления" OtherKey="номер_почтового_отправления" Type="Почтовые_отправления" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[Почтовые отправления]" Member="Почтовые_отправления">
+    <Type Name="Почтовые_отправления">
+      <Column Name="номер_почтового_отправления" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="кому" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="от_кого" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="откуда" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="куда" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="дата_отправки" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="выдана" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="индификатор_склада" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="тип_отправления" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="Почтовые_отправления_tracks" Member="tracks" ThisKey="номер_почтового_отправления" OtherKey="id" Type="tracks" Cardinality="One" />
+      <Association Name="Почтовые_отправления_имеют" Member="имеют" ThisKey="номер_почтового_отправления" OtherKey="номер_почтового_отправления" Type="имеют" />
+      <Association Name="Почтовые_отправления_Связующая" Member="Связующая" ThisKey="номер_почтового_отправления" OtherKey="номер_почтового_отправления" Type="Связующая" />
+      <Association Name="Склады_Почтовые_отправления" Member="Склады" ThisKey="номер_почтового_отправления" OtherKey="индификатор_склада" Type="Склады" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Связующая" Member="Связующая">
+    <Type Name="Связующая">
+      <Column Name="индификатор_извещения" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="номер_геолокации" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="номер_сотрудника" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="номер_почтового_отправления" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Association Name="Извещения_Связующая" Member="Извещения" ThisKey="индификатор_извещения" OtherKey="идентификатор_извещения" Type="Извещения" IsForeignKey="true" />
+      <Association Name="Почтовые_отправления_Связующая" Member="Почтовые_отправления" ThisKey="номер_почтового_отправления" OtherKey="номер_почтового_отправления" Type="Почтовые_отправления" IsForeignKey="true" />
+      <Association Name="Сотрудники_Связующая" Member="Сотрудники" ThisKey="номер_сотрудника" OtherKey="номер_сотрудника" Type="Сотрудники" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Склады" Member="Склады">
+    <Type Name="Склады">
+      <Column Name="индификатор_склада" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Номер_склада" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Адрес" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Город" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="Склады_Почтовые_отправления" Member="Почтовые_отправления" ThisKey="индификатор_склада" OtherKey="номер_почтового_отправления" Type="Почтовые_отправления" Cardinality="One" />
+      <Association Name="Склады_Сотрудники" Member="Сотрудники" ThisKey="индификатор_склада" OtherKey="индификатор_склада" Type="Сотрудники" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Сотрудники" Member="Сотрудники">
+    <Type Name="Сотрудники">
+      <Column Name="номер_сотрудника" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="индификатор_склада" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ФИО" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Должность" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Оклад" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Сотрудники_Связующая" Member="Связующая" ThisKey="номер_сотрудника" OtherKey="номер_сотрудника" Type="Связующая" />
+      <Association Name="Склады_Сотрудники" Member="Склады" ThisKey="индификатор_склада" OtherKey="индификатор_склада" Type="Склады" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

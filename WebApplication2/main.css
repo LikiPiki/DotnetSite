@@ -1,0 +1,26 @@
+﻿/* Default styles */
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.content {
+    padding: 10px;
+}
+
+.main-table {
+    border-spacing: 0;
+}
+
+.heading {
+    font-variant: bold;
+}
+
+.container {
+    padding: 40px;
+}
+
+.warning {
+    color: orangered;
+}
