@@ -20,6 +20,8 @@
             width: 50%;
         }
         .auto-style5 {
+            padding-left: 40px;
+            padding-right: 40px;
             width: 20%;
         }
         .auto-style5 {
@@ -68,9 +70,17 @@
 <form id="form2" runat="server">
     <table class="auto-style11 main-table">
         <tr>
-            <td class="auto-style5 blue"></td>
+            <td class="auto-style5 blue">
+                <a href="Index.aspx">
+                    <asp:Image CssClass="image-logo" ID="imageLogo" runat="server" ImageUrl="images/logo.png" Width="150px" />
+                </a>
+            </td>
             <td class="auto-style4 blue">
-                <h1 class="logo">Почта</h1>
+                <a href="Index.aspx" class="simple-link">
+                    <h1 class="logo">
+                        Почта
+                    </h1>
+                </a>
             </td>
             <td class="auto-style6 blue">
                 <table>
@@ -116,7 +126,7 @@
             </td>
         </tr>
         <tr>
-            <td class="auto-style5 blue">
+            <td class="blue">
                 <table class="auto-style7">
                     <tr>
                         <td class="full-width">
@@ -128,6 +138,19 @@
                             <asp:LinkButton class="menu-link" ID="LinkButton2" runat="server" OnClick="LinkButton2_Click">Личный кабинет</asp:LinkButton>
                         </td>
                     </tr>
+                    <%
+                        // Information about packages are avaliable only for admin and employee
+                        if (Convert.ToInt32(Session["ROLE"]) > 0)
+                        {
+                    %>
+                        <tr>
+                            <td>
+                                <asp:LinkButton class="menu-link" ID="LinkButton4" runat="server" OnClick="LinkButton4_Click">Почтовые отправления</asp:LinkButton>
+                            </td>
+                        </tr>
+                    <%
+                        }
+                    %>
                 </table>
             </td>
             <td class="auto-style4">

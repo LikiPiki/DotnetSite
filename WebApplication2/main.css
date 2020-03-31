@@ -5,6 +5,15 @@
     box-sizing: border-box;
 }
 
+.logo {
+    padding-left: 40px;
+}
+
+.simple-link {
+    text-decoration: none;
+    color: white;
+}
+
 .content {
     padding: 10px;
 }
@@ -23,4 +32,8 @@
 
 .warning {
     color: orangered;
+}
+
+.full-table {
+    width: 100%;
 }

@@ -39,6 +39,7 @@ namespace WebApplication2
         protected void loginBtn_Click(object sender, EventArgs e)
         {
             long iduser;
+            int userRole = 0;
             string myuser;
             string pass, login;
             login = loginBox.Text;
@@ -51,6 +52,10 @@ namespace WebApplication2
                 var selectedUser = (from item in db.users where item.username == login && item.password == pass select item).Single();
                 myuser = selectedUser.username;
                 iduser = selectedUser.id;
+                // if 0 - default simple user
+                //    1 - admin
+                //    2 - Employee
+                userRole = selectedUser.isAdmin; 
 
                 loginBox.Visible = false;
                 passBox.Visible = false;
@@ -64,6 +69,7 @@ namespace WebApplication2
 
                 Session["IDP"] = iduser;
                 Session["idU"] = myuser;
+                Session["ROLE"] = userRole;
             } catch (Exception ex)
             {
                 Label1.Text = "";
@@ -98,6 +104,11 @@ namespace WebApplication2
         protected void LinkButton1_Click(object sender, EventArgs e)
         {
             Response.Redirect("Index.aspx");
+        }
+
+        protected void LinkButton4_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Packages.aspx");
         }
     }
 
