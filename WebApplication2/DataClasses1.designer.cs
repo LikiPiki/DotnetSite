@@ -33,9 +33,6 @@ namespace WebApplication2
     partial void Inserttracks(tracks instance);
     partial void Updatetracks(tracks instance);
     partial void Deletetracks(tracks instance);
-    partial void Insertusers(users instance);
-    partial void Updateusers(users instance);
-    partial void Deleteusers(users instance);
     partial void InsertЗарплаты(Зарплаты instance);
     partial void UpdateЗарплаты(Зарплаты instance);
     partial void DeleteЗарплаты(Зарплаты instance);
@@ -57,6 +54,9 @@ namespace WebApplication2
     partial void InsertСотрудники(Сотрудники instance);
     partial void UpdateСотрудники(Сотрудники instance);
     partial void DeleteСотрудники(Сотрудники instance);
+    partial void Insertusers(users instance);
+    partial void Updateusers(users instance);
+    partial void Deleteusers(users instance);
     #endregion
 		
 		public DataClasses1DataContext() : 
@@ -94,14 +94,6 @@ namespace WebApplication2
 			get
 			{
 				return this.GetTable<tracks>();
-			}
-		}
-		
-		public System.Data.Linq.Table<users> users
-		{
-			get
-			{
-				return this.GetTable<users>();
 			}
 		}
 		
@@ -160,6 +152,14 @@ namespace WebApplication2
 				return this.GetTable<Сотрудники>();
 			}
 		}
+		
+		public System.Data.Linq.Table<users> users
+		{
+			get
+			{
+				return this.GetTable<users>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tracks")]
@@ -176,8 +176,6 @@ namespace WebApplication2
 		
 		private EntityRef<users> _users;
 		
-		private EntityRef<Почтовые_отправления> _Почтовые_отправления;
-		
     #region Определения метода расширяемости
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -193,7 +191,6 @@ namespace WebApplication2
 		public tracks()
 		{
 			this._users = default(EntityRef<users>);
-			this._Почтовые_отправления = default(EntityRef<Почтовые_отправления>);
 			OnCreated();
 		}
 		
@@ -208,10 +205,6 @@ namespace WebApplication2
 			{
 				if ((this._id != value))
 				{
-					if (this._Почтовые_отправления.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnidChanging(value);
 					this.SendPropertyChanging();
 					this._id = value;
@@ -299,40 +292,6 @@ namespace WebApplication2
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Почтовые_отправления_tracks", Storage="_Почтовые_отправления", ThisKey="id", OtherKey="номер_почтового_отправления", IsForeignKey=true)]
-		public Почтовые_отправления Почтовые_отправления
-		{
-			get
-			{
-				return this._Почтовые_отправления.Entity;
-			}
-			set
-			{
-				Почтовые_отправления previousValue = this._Почтовые_отправления.Entity;
-				if (((previousValue != value) 
-							|| (this._Почтовые_отправления.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Почтовые_отправления.Entity = null;
-						previousValue.tracks = null;
-					}
-					this._Почтовые_отправления.Entity = value;
-					if ((value != null))
-					{
-						value.tracks = this;
-						this._id = value.номер_почтового_отправления;
-					}
-					else
-					{
-						this._id = default(int);
-					}
-					this.SendPropertyChanged("Почтовые_отправления");
-				}
-			}
-		}
-		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -351,168 +310,6 @@ namespace WebApplication2
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.users")]
-	public partial class users : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _username;
-		
-		private string _password;
-		
-		private int _isAdmin;
-		
-		private int _id;
-		
-		private EntitySet<tracks> _tracks;
-		
-    #region Определения метода расширяемости
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnusernameChanging(string value);
-    partial void OnusernameChanged();
-    partial void OnpasswordChanging(string value);
-    partial void OnpasswordChanged();
-    partial void OnisAdminChanging(int value);
-    partial void OnisAdminChanged();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    #endregion
-		
-		public users()
-		{
-			this._tracks = new EntitySet<tracks>(new Action<tracks>(this.attach_tracks), new Action<tracks>(this.detach_tracks));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_username", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
-		public string username
-		{
-			get
-			{
-				return this._username;
-			}
-			set
-			{
-				if ((this._username != value))
-				{
-					this.OnusernameChanging(value);
-					this.SendPropertyChanging();
-					this._username = value;
-					this.SendPropertyChanged("username");
-					this.OnusernameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_password", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
-		public string password
-		{
-			get
-			{
-				return this._password;
-			}
-			set
-			{
-				if ((this._password != value))
-				{
-					this.OnpasswordChanging(value);
-					this.SendPropertyChanging();
-					this._password = value;
-					this.SendPropertyChanged("password");
-					this.OnpasswordChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_isAdmin", DbType="Int NOT NULL")]
-		public int isAdmin
-		{
-			get
-			{
-				return this._isAdmin;
-			}
-			set
-			{
-				if ((this._isAdmin != value))
-				{
-					this.OnisAdminChanging(value);
-					this.SendPropertyChanging();
-					this._isAdmin = value;
-					this.SendPropertyChanged("isAdmin");
-					this.OnisAdminChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="users_tracks", Storage="_tracks", ThisKey="id", OtherKey="индификатор_пользователя")]
-		public EntitySet<tracks> tracks
-		{
-			get
-			{
-				return this._tracks;
-			}
-			set
-			{
-				this._tracks.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_tracks(tracks entity)
-		{
-			this.SendPropertyChanging();
-			entity.users = this;
-		}
-		
-		private void detach_tracks(tracks entity)
-		{
-			this.SendPropertyChanging();
-			entity.users = null;
 		}
 	}
 	
@@ -1080,8 +877,6 @@ namespace WebApplication2
 		
 		private string _тип_отправления;
 		
-		private EntityRef<tracks> _tracks;
-		
 		private EntitySet<имеют> _имеют;
 		
 		private EntitySet<Связующая> _Связующая;
@@ -1114,7 +909,6 @@ namespace WebApplication2
 		
 		public Почтовые_отправления()
 		{
-			this._tracks = default(EntityRef<tracks>);
 			this._имеют = new EntitySet<имеют>(new Action<имеют>(this.attach_имеют), new Action<имеют>(this.detach_имеют));
 			this._Связующая = new EntitySet<Связующая>(new Action<Связующая>(this.attach_Связующая), new Action<Связующая>(this.detach_Связующая));
 			this._Склады = default(EntityRef<Склады>);
@@ -1301,35 +1095,6 @@ namespace WebApplication2
 					this._тип_отправления = value;
 					this.SendPropertyChanged("тип_отправления");
 					this.Onтип_отправленияChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Почтовые_отправления_tracks", Storage="_tracks", ThisKey="номер_почтового_отправления", OtherKey="id", IsUnique=true, IsForeignKey=false)]
-		public tracks tracks
-		{
-			get
-			{
-				return this._tracks.Entity;
-			}
-			set
-			{
-				tracks previousValue = this._tracks.Entity;
-				if (((previousValue != value) 
-							|| (this._tracks.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tracks.Entity = null;
-						previousValue.Почтовые_отправления = null;
-					}
-					this._tracks.Entity = value;
-					if ((value != null))
-					{
-						value.Почтовые_отправления = this;
-					}
-					this.SendPropertyChanged("tracks");
 				}
 			}
 		}
@@ -2138,6 +1903,192 @@ namespace WebApplication2
 		{
 			this.SendPropertyChanging();
 			entity.Сотрудники = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.users")]
+	public partial class users : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _username;
+		
+		private string _password;
+		
+		private int _isAdmin;
+		
+		private int _id;
+		
+		private string _email;
+		
+		private EntitySet<tracks> _tracks;
+		
+    #region Определения метода расширяемости
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnusernameChanging(string value);
+    partial void OnusernameChanged();
+    partial void OnpasswordChanging(string value);
+    partial void OnpasswordChanged();
+    partial void OnisAdminChanging(int value);
+    partial void OnisAdminChanged();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnemailChanging(string value);
+    partial void OnemailChanged();
+    #endregion
+		
+		public users()
+		{
+			this._tracks = new EntitySet<tracks>(new Action<tracks>(this.attach_tracks), new Action<tracks>(this.detach_tracks));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_username", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string username
+		{
+			get
+			{
+				return this._username;
+			}
+			set
+			{
+				if ((this._username != value))
+				{
+					this.OnusernameChanging(value);
+					this.SendPropertyChanging();
+					this._username = value;
+					this.SendPropertyChanged("username");
+					this.OnusernameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_password", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string password
+		{
+			get
+			{
+				return this._password;
+			}
+			set
+			{
+				if ((this._password != value))
+				{
+					this.OnpasswordChanging(value);
+					this.SendPropertyChanging();
+					this._password = value;
+					this.SendPropertyChanged("password");
+					this.OnpasswordChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_isAdmin", DbType="Int NOT NULL")]
+		public int isAdmin
+		{
+			get
+			{
+				return this._isAdmin;
+			}
+			set
+			{
+				if ((this._isAdmin != value))
+				{
+					this.OnisAdminChanging(value);
+					this.SendPropertyChanging();
+					this._isAdmin = value;
+					this.SendPropertyChanged("isAdmin");
+					this.OnisAdminChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_email", DbType="VarChar(255)")]
+		public string email
+		{
+			get
+			{
+				return this._email;
+			}
+			set
+			{
+				if ((this._email != value))
+				{
+					this.OnemailChanging(value);
+					this.SendPropertyChanging();
+					this._email = value;
+					this.SendPropertyChanged("email");
+					this.OnemailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="users_tracks", Storage="_tracks", ThisKey="id", OtherKey="индификатор_пользователя")]
+		public EntitySet<tracks> tracks
+		{
+			get
+			{
+				return this._tracks;
+			}
+			set
+			{
+				this._tracks.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_tracks(tracks entity)
+		{
+			this.SendPropertyChanging();
+			entity.users = this;
+		}
+		
+		private void detach_tracks(tracks entity)
+		{
+			this.SendPropertyChanging();
+			entity.users = null;
 		}
 	}
 }

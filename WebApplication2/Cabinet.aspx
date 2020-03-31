@@ -1,5 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Cabinet.aspx.cs" Inherits="WebApplication2.WebForm2" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
+    <style type="text/css">
+        .auto-style12.
+        .auto-style13,
+        .auto-style14 {
+            width: 33%;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder3" runat="server">
     <div class="container">
@@ -26,6 +33,33 @@
                 </asp:GridView>
                 <asp:LinqDataSource ID="LinqDataSource1" runat="server" ContextTypeName="WebApplication2.DataClasses1DataContext" EntityTypeName="" Select="new (номер_почтового_отправления, кому, от_кого, откуда, куда, дата_отправки, выдана, тип_отправления)" TableName="Почтовые_отправления">
                 </asp:LinqDataSource>
+                <br />
+                <h2>Добавить новое отправление в отслеживание:</h2>
+                <table>
+                    <tr>
+                        <td class="auto-style14">Трек номер отправления:</td>
+                        <td class="auto-style13">
+
+                            <asp:TextBox ID="CabinetAddTrackBox" runat="server"></asp:TextBox>
+
+                        </td>
+                        <td class="auto-style12">
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="В трек номере должны быть только цифры" ForeColor="Red" ValidationExpression="[0-9]" ControlToValidate="CabinetAddTrackBox" EnableClientScript="False"></asp:RegularExpressionValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <asp:Button ID="CabinetAddTrackBtn" runat="server" Text="Добавить в отслиживаемые" OnClick="CabinetAddTrackBtn_Click" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+
+                            <asp:Label ID="CabinetAddTrackInfo" runat="server" ForeColor="#003399" Text="Label"></asp:Label>
+
+                        </td>
+                    </tr>
+                </table>
             </div>
         <% } 
             else 

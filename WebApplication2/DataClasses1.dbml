@@ -6,16 +6,6 @@
       <Column Name="индификатор_почтового_отправления" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="индификатор_пользователя" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="users_tracks" Member="users" ThisKey="индификатор_пользователя" OtherKey="id" Type="users" IsForeignKey="true" />
-      <Association Name="Почтовые_отправления_tracks" Member="Почтовые_отправления" ThisKey="id" OtherKey="номер_почтового_отправления" Type="Почтовые_отправления" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.users" Member="users">
-    <Type Name="users">
-      <Column Name="username" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="password" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="isAdmin" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Association Name="users_tracks" Member="tracks" ThisKey="id" OtherKey="индификатор_пользователя" Type="tracks" />
     </Type>
   </Table>
   <Table Name="dbo.Зарплаты" Member="Зарплаты">
@@ -57,7 +47,6 @@
       <Column Name="выдана" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="индификатор_склада" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="тип_отправления" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Association Name="Почтовые_отправления_tracks" Member="tracks" ThisKey="номер_почтового_отправления" OtherKey="id" Type="tracks" Cardinality="One" />
       <Association Name="Почтовые_отправления_имеют" Member="имеют" ThisKey="номер_почтового_отправления" OtherKey="номер_почтового_отправления" Type="имеют" />
       <Association Name="Почтовые_отправления_Связующая" Member="Связующая" ThisKey="номер_почтового_отправления" OtherKey="номер_почтового_отправления" Type="Связующая" />
       <Association Name="Склады_Почтовые_отправления" Member="Склады" ThisKey="номер_почтового_отправления" OtherKey="индификатор_склада" Type="Склады" IsForeignKey="true" />
@@ -94,6 +83,16 @@
       <Column Name="Оклад" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Сотрудники_Связующая" Member="Связующая" ThisKey="номер_сотрудника" OtherKey="номер_сотрудника" Type="Связующая" />
       <Association Name="Склады_Сотрудники" Member="Склады" ThisKey="индификатор_склада" OtherKey="индификатор_склада" Type="Склады" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.users" Member="users">
+    <Type Name="users">
+      <Column Name="username" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="isAdmin" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Association Name="users_tracks" Member="tracks" ThisKey="id" OtherKey="индификатор_пользователя" Type="tracks" />
     </Type>
   </Table>
 </Database>

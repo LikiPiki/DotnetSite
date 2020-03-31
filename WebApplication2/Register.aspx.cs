@@ -25,11 +25,13 @@ namespace WebApplication2
                 users myUser = new users();
                 myUser.username = RegLoginBox.Text;
                 myUser.password = RegPassBox.Text;
+                myUser.email = RegEmailBox.Text;
                 myUser.isAdmin = 0; // Simple user
                 if (myUser.password == RegRepeatPassBox.Text)
                 {
                     RegInfo.Text = "Пользователь " + myUser.username + " успешно создан!"; 
                     db.users.InsertOnSubmit(myUser);
+                    db.SubmitChanges();
                 } else
                 {
                     RegInfo.Text = "Ошибка. Пароли не совпадают!";
