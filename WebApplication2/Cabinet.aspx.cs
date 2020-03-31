@@ -12,6 +12,8 @@ namespace WebApplication2
         protected void Page_Load(object sender, EventArgs e)
         {
             CabinetAddTrackInfo.Visible = false;
+            CabinetRemoveSuccessLabel.Visible = false;
+
             this.updateCabinetTracksTable();
         }
 
@@ -53,9 +55,19 @@ namespace WebApplication2
                         индификатор_пользователя = iduser,
                         индификатор_почтового_отправления = Convert.ToInt32(CabinetAddTrackBox.Text)
                     };
-                    db.tracks.InsertOnSubmit(myTrack);
-                    db.SubmitChanges();
-                    CabinetAddTrackInfo.Text = "Трек номер добавлен успешно" + myTrack.индификатор_пользователя + " " + myTrack.индификатор_почтового_отправления;
+
+                    var count = db.tracks.Where(x => ((x.индификатор_пользователя == myTrack.индификатор_пользователя) && (x.индификатор_почтового_отправления == myTrack.индификатор_почтового_отправления)))
+                        .Select(x => x).Count();
+
+                    if (count == 0)
+                    {
+                        db.tracks.InsertOnSubmit(myTrack);
+                        db.SubmitChanges();
+                        CabinetAddTrackInfo.Text = "Трек номер добавлен успешно" + myTrack.индификатор_пользователя + " " + myTrack.индификатор_почтового_отправления;
+                    } else
+                    {
+                        CabinetAddTrackInfo.Text = "Данное отправление уже было добавлено!";
+                    }
 
                     this.updateCabinetTracksTable();
                 } catch (Exception ex)
@@ -64,6 +76,34 @@ namespace WebApplication2
                 }
                 CabinetAddTrackInfo.Visible = true;
             }
+        }
+
+        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Session["IDG"] = this.GridView1.SelectedValue;
+        }
+
+        protected void CabinetRemoveTrackBtn_Click(object sender, EventArgs e)
+        {
+            int selectedItem = Convert.ToInt32(Session["IDG"]);
+            int userid = Convert.ToInt32(Session["IDP"]);
+            try
+            {
+                DataClasses1DataContext db = new DataClasses1DataContext();
+                var selectedRow = (from tracks in db.tracks
+                                   where tracks.индификатор_пользователя == userid
+                                    && tracks.индификатор_почтового_отправления == selectedItem
+                                   select tracks).SingleOrDefault();
+
+                db.tracks.DeleteOnSubmit(selectedRow);
+                db.SubmitChanges();
+                CabinetRemoveSuccessLabel.Text = "Успешно удалено!";
+            } catch(Exception ex)
+            {
+                CabinetRemoveSuccessLabel.Text = ex.Message;
+            }
+            CabinetRemoveSuccessLabel.Visible = true;
+            this.updateCabinetTracksTable();
         }
     }
 }

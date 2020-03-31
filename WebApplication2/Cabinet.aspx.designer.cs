@@ -42,6 +42,24 @@ namespace WebApplication2
         protected global::System.Web.UI.WebControls.LinqDataSource LinqDataSource1;
 
         /// <summary>
+        /// CabinetRemoveTrackBtn элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button CabinetRemoveTrackBtn;
+
+        /// <summary>
+        /// CabinetRemoveSuccessLabel элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label CabinetRemoveSuccessLabel;
+
+        /// <summary>
         /// CabinetAddTrackBox элемент управления.
         /// </summary>
         /// <remarks>

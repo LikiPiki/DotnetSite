@@ -18,7 +18,7 @@
                 Привет 
                 <asp:Label ID="cabinetUsernameLabel" runat="server" Text="Label"></asp:Label>
                 <h2>Ваши отслеживаемые почтовые отправления</h2>
-                <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="LinqDataSource1" AllowPaging="True">
+                <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="LinqDataSource1" AllowPaging="True" DataKeyNames="номер_почтового_отправления" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
                     <Columns>
                         <asp:BoundField DataField="номер_почтового_отправления" HeaderText="Номер" ReadOnly="True" SortExpression="номер_почтового_отправления" />
                         <asp:BoundField DataField="кому" HeaderText="Кому" ReadOnly="True" SortExpression="кому" />
@@ -30,9 +30,20 @@
                         <asp:BoundField DataField="тип_отправления" HeaderText="Тип" ReadOnly="True" SortExpression="тип_отправления" />
                         <asp:CommandField ShowSelectButton="True" />
                     </Columns>
+                    <SelectedRowStyle BackColor="#66CCFF" CssClass="selected-row" ForeColor="Black" />
                 </asp:GridView>
                 <asp:LinqDataSource ID="LinqDataSource1" runat="server" ContextTypeName="WebApplication2.DataClasses1DataContext" EntityTypeName="" Select="new (номер_почтового_отправления, кому, от_кого, откуда, куда, дата_отправки, выдана, тип_отправления)" TableName="Почтовые_отправления">
                 </asp:LinqDataSource>
+                <table>
+                    <tr>
+                        <td>
+                            <asp:Button ID="CabinetRemoveTrackBtn" runat="server" Text="Удалить" OnClick="CabinetRemoveTrackBtn_Click" Width="144px" />
+                        </td>
+                        <td>
+                            <asp:Label ID="CabinetRemoveSuccessLabel" runat="server" Text="Label" ForeColor="Red"></asp:Label>
+                        </td>
+                    </tr>
+                </table>
                 <br />
                 <h2>Добавить новое отправление в отслеживание:</h2>
                 <table>
