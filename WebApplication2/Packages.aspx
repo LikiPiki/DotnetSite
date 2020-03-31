@@ -85,6 +85,9 @@
                     </td>
                     <td>
 
+                        <asp:DropDownList ID="NewWarehouseNumber" runat="server" DataTextField="label" DataValueField="индификатор_склада">
+                        </asp:DropDownList>
+
                     </td>
                 </tr>
                 <tr>

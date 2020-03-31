@@ -60,6 +60,15 @@ namespace WebApplication2
         protected global::System.Web.UI.WebControls.DropDownList NewPackageType;
 
         /// <summary>
+        /// NewWarehouseNumber элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList NewWarehouseNumber;
+
+        /// <summary>
         /// NewPackageBtn элемент управления.
         /// </summary>
         /// <remarks>

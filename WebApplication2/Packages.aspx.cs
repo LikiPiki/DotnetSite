@@ -18,6 +18,11 @@ namespace WebApplication2
             NewPackageType.DataSource = dropData;
             NewPackageType.DataSourceID = "";
             NewPackageType.DataBind();
+
+            var warehousesData = db.Склады.Select(x => new { x.индификатор_склада, label = string.Format("{0} {1} {2}", x.Город, x.Адрес, x.Номер_склада) });
+            NewWarehouseNumber.DataSource = warehousesData;
+            NewWarehouseNumber.DataSourceID = "";
+            NewWarehouseNumber.DataBind();
         }
 
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
