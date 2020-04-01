@@ -11,8 +11,16 @@ namespace WebApplication2
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            AddNewPackagePanel.Visible = true;
+            NewPackageInfoLabel.Visible = false;
+            PackagesSubmitlabel.Visible = false;
+
+            this.updateDropdownData();
+        }
+
+        protected void updateDropdownData()
+        {
             DataClasses1DataContext db = new DataClasses1DataContext();
+
             // select all distinct packages types
             var dropData = db.Почтовые_отправления.Select(x => x.тип_отправления).AsEnumerable().Distinct().ToList();
             NewPackageType.DataSource = dropData;
@@ -30,16 +38,49 @@ namespace WebApplication2
             Session["SELECTED"] = GridView1.SelectedValue;
         }
 
-        protected void PackagesAddNewBtn_Click(object sender, EventArgs e)
+        protected void NewPackageBtn_Click(object sender, EventArgs e)
         {
-            PackagesAddNewBtn.Visible = false;
-            AddNewPackagePanel.Visible = true;
+            DataClasses1DataContext db = new DataClasses1DataContext();
+            if (Page.IsValid)
+            {
+                try
+                {
+                    Почтовые_отправления myPackage = new Почтовые_отправления();
+                    myPackage.выдана = false;
+                    myPackage.дата_отправки = DateTime.Now;
+                    myPackage.кому = PackagesToBox.Text;
+                    myPackage.от_кого = PackagesFromBox.Text;
+                    myPackage.откуда = PackagesFromHere.Text;
+                    myPackage.куда = PackagesToHere.Text;
+                    db.Почтовые_отправления.InsertOnSubmit(myPackage);
+                    db.SubmitChanges();
+
+                    NewPackageInfoLabel.Text = "Успешно добавлена";
+                } catch (Exception ex)
+                {
+                    NewPackageInfoLabel.Text = ex.Message;
+                }
+                NewPackageInfoLabel.Visible = true;
+            }
         }
 
-        protected void NewPackageCancel_Click(object sender, EventArgs e)
+        protected void SubmitPackage_Click(object sender, EventArgs e)
         {
-            PackagesAddNewBtn.Visible = true;
-            AddNewPackagePanel.Visible = false;
+            int selectedItem = Convert.ToInt32(Session["SELECTED"]);
+
+            try
+            {
+                DataClasses1DataContext db = new DataClasses1DataContext();
+                var dd = (from p in db.Почтовые_отправления where p.номер_почтового_отправления == selectedItem select p).SingleOrDefault();
+                dd.выдана = true;
+                db.SubmitChanges();
+                PackagesSubmitlabel.Text = "Успешно выдана!";
+                Response.Redirect(Request.RawUrl);
+            } catch(Exception ex)
+            {
+                PackagesSubmitlabel.Text = ex.Message;
+            }
+            PackagesSubmitlabel.Visible = true;
         }
     }
 }

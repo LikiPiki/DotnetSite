@@ -63,7 +63,7 @@ namespace WebApplication2
                     {
                         db.tracks.InsertOnSubmit(myTrack);
                         db.SubmitChanges();
-                        CabinetAddTrackInfo.Text = "Трек номер добавлен успешно" + myTrack.индификатор_пользователя + " " + myTrack.индификатор_почтового_отправления;
+                        CabinetAddTrackInfo.Text = "Трек номер добавлен успешно";
                     } else
                     {
                         CabinetAddTrackInfo.Text = "Данное отправление уже было добавлено!";

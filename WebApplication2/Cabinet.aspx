@@ -29,7 +29,7 @@
                         <asp:BoundField DataField="дата_отправки" HeaderText="Дата отправки" ReadOnly="True" SortExpression="дата_отправки" />
                         <asp:CheckBoxField DataField="выдана" HeaderText="Выдана" ReadOnly="True" SortExpression="выдана" />
                         <asp:BoundField DataField="тип_отправления" HeaderText="Тип" ReadOnly="True" SortExpression="тип_отправления" />
-                        <asp:CommandField ShowSelectButton="True" />
+                        <asp:CommandField ShowSelectButton="True" HeaderText="Функции" />
                     </Columns>
                     <EditRowStyle BackColor="#7C6F57" />
                     <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />

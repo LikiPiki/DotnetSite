@@ -37,14 +37,37 @@
         </asp:GridView>
         <asp:LinqDataSource ID="LinqDataSource1" runat="server" ContextTypeName="WebApplication2.DataClasses1DataContext" EnableDelete="True" EnableInsert="True" EnableUpdate="True" EntityTypeName="" TableName="Почтовые_отправления">
         </asp:LinqDataSource>
-        <asp:Button ID="PackagesAddNewBtn" runat="server" Text="Добавить почтовое отправление" Width="307px" />
-
+        <%
+            // Information about packages are avaliable only for admin and employee
+            if (Convert.ToInt32(Session["ROLE"]) > 0)
+            {
+        %>
+            <table>
+                <tr>
+                    <td>
+                         <asp:Button ID="SubmitPackage" runat="server" Text="Выдать выбранную посылку" OnClick="SubmitPackage_Click" />
+                    </td>
+                    <td>
+                        <asp:Label ID="PackagesSubmitlabel" runat="server" Text="Label"></asp:Label>
+                    </td>
+                </tr>
+            </table>       
+        <%
+            }
+        %>
+        <br />
+        <h2>Добавление нового отправления:</h2>
         <asp:Panel ID="AddNewPackagePanel" runat="server">
             <table>
                 <tr>
                     <td>Тип отправления</td>
                     <td>
                         <asp:DropDownList ID="NewPackageType" runat="server" DataSourceID="LinqDataSource2"></asp:DropDownList>
+                    </td>
+                    <td>
+
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="NewPackageType" ErrorMessage="Поле не может быть пустым" ForeColor="Red" EnableClientScript="False"></asp:RequiredFieldValidator>
+
                     </td>
                 </tr>
                 <tr>
@@ -53,6 +76,11 @@
                     </td>
                     <td>
 
+                        <asp:TextBox ID="PackagesToBox" runat="server"></asp:TextBox>
+
+                    </td>
+                    <td>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="PackagesToBox" ErrorMessage="Поле не может быть пустым" ForeColor="Red" EnableClientScript="False"></asp:RequiredFieldValidator>
                     </td>
                 </tr>
                 <tr>
@@ -60,6 +88,10 @@
                         От кого
                     </td>
                     <td>
+                        <asp:TextBox ID="PackagesFromBox" runat="server"></asp:TextBox>
+                    </td>
+                    <td>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="PackagesFromBox" ErrorMessage="Поле не может быть пустым" ForeColor="Red" EnableClientScript="False"></asp:RequiredFieldValidator>
 
                     </td>
                 </tr>
@@ -69,6 +101,12 @@
                     </td>
                     <td>
 
+                        <asp:TextBox ID="PackagesFromHere" runat="server"></asp:TextBox>
+
+                    </td>
+                    <td>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="PackagesFromHere" ErrorMessage="Поле не может быть пустым" ForeColor="Red" EnableClientScript="False"></asp:RequiredFieldValidator>
+
                     </td>
                 </tr>
                 <tr>
@@ -76,6 +114,12 @@
                         Куда
                     </td>
                     <td>
+
+                        <asp:TextBox ID="PackagesToHere" runat="server"></asp:TextBox>
+
+                    </td>
+                    <td>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="PackagesToHere" ErrorMessage="Поле не может быть пустым" ForeColor="Red" EnableClientScript="False"></asp:RequiredFieldValidator>
 
                     </td>
                 </tr>
@@ -89,13 +133,17 @@
                         </asp:DropDownList>
 
                     </td>
+                    <td>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="NewWarehouseNumber" ErrorMessage="Поле не может быть пустым" ForeColor="Red" EnableClientScript="False"></asp:RequiredFieldValidator>
+
+                    </td>
                 </tr>
                 <tr>
-                    <td>
-                        <asp:Button ID="NewPackageBtn" runat="server" Text="Добавить" />
+                    <td colspan="2">
+                        <asp:Button ID="NewPackageBtn" runat="server" Text="Добавить" OnClick="NewPackageBtn_Click" Width="277px" />
                     </td>
                     <td>
-                         <asp:Button ID="NewPackageCancel" runat="server" Text="Отменить" ForeColor="Red" />
+                        <asp:Label ID="NewPackageInfoLabel" runat="server" Text="Label" ForeColor="Red"></asp:Label>
                     </td>
                 </tr>
 
