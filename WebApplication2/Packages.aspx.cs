@@ -52,6 +52,8 @@ namespace WebApplication2
                     myPackage.от_кого = PackagesFromBox.Text;
                     myPackage.откуда = PackagesFromHere.Text;
                     myPackage.куда = PackagesToHere.Text;
+                    myPackage.индификатор_склада = Convert.ToInt32(NewWarehouseNumber.SelectedValue);
+                    myPackage.тип_отправления = NewPackageType.SelectedValue;
                     db.Почтовые_отправления.InsertOnSubmit(myPackage);
                     db.SubmitChanges();
 
@@ -81,6 +83,11 @@ namespace WebApplication2
                 PackagesSubmitlabel.Text = ex.Message;
             }
             PackagesSubmitlabel.Visible = true;
+        }
+
+        protected void PackageCreatePackage_Click(object sender, EventArgs e)
+        {
+            AddNewPackagePanel.Visible = true;
         }
     }
 }

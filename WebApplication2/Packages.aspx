@@ -45,9 +45,10 @@
             <table>
                 <tr>
                     <td>
-                         <asp:Button ID="SubmitPackage" runat="server" Text="Выдать выбранную посылку" OnClick="SubmitPackage_Click" />
+                         <asp:Button ID="SubmitPackage" runat="server" Text="Выдать выбранную посылку" OnClick="SubmitPackage_Click" Width="229px" />
                     </td>
                     <td>
+                        <asp:Button ID="PackageCreatePackage" runat="server" Text="Создать отправление" Width="159px" OnClick="PackageCreatePackage_Click" />
                         <asp:Label ID="PackagesSubmitlabel" runat="server" Text="Label"></asp:Label>
                     </td>
                 </tr>
@@ -56,8 +57,8 @@
             }
         %>
         <br />
-        <h2>Добавление нового отправления:</h2>
-        <asp:Panel ID="AddNewPackagePanel" runat="server">
+        <asp:Panel ID="AddNewPackagePanel" runat="server" Visible="false">
+            <h2>Добавление нового отправления:</h2>
             <table>
                 <tr>
                     <td>Тип отправления</td>

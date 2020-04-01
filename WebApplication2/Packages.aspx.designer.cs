@@ -42,6 +42,15 @@ namespace WebApplication2
         protected global::System.Web.UI.WebControls.Button SubmitPackage;
 
         /// <summary>
+        /// PackageCreatePackage элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button PackageCreatePackage;
+
+        /// <summary>
         /// PackagesSubmitlabel элемент управления.
         /// </summary>
         /// <remarks>
