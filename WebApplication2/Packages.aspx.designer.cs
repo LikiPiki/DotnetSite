@@ -15,6 +15,33 @@ namespace WebApplication2
     {
 
         /// <summary>
+        /// PackagesFindByTrackBox элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox PackagesFindByTrackBox;
+
+        /// <summary>
+        /// PackagesFindByTrack элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button PackagesFindByTrack;
+
+        /// <summary>
+        /// PackageFindInfo элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label PackageFindInfo;
+
+        /// <summary>
         /// GridView1 элемент управления.
         /// </summary>
         /// <remarks>

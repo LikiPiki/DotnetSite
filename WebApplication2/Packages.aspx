@@ -6,6 +6,24 @@
         <h2 class="heading">
             Информация о почтовых отправлениях
         </h2>
+        <p class="heading">
+            <table>
+                <tr>
+                    <td>
+                        Поиск по трек номеру:
+                    </td>
+                    <td>
+                        <asp:TextBox ID="PackagesFindByTrackBox" runat="server" Width="200px"></asp:TextBox>
+                    </td>
+                    <td>
+                        <asp:Button ID="PackagesFindByTrack" runat="server" Text="Искать" OnClick="PackagesFindByTrack_Click" />
+                    </td>
+                    <td>
+                        <asp:Label ID="PackageFindInfo" runat="server" Text="Label" ForeColor="Red"></asp:Label>
+                    </td>
+                </tr>
+            </table>
+        </p>
         <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="номер_почтового_отправления" DataSourceID="LinqDataSource1" CellPadding="4" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
             <AlternatingRowStyle BackColor="White" />
             <Columns>

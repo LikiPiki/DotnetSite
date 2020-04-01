@@ -13,6 +13,7 @@ namespace WebApplication2
         {
             NewPackageInfoLabel.Visible = false;
             PackagesSubmitlabel.Visible = false;
+            PackageFindInfo.Visible = false;
 
             this.updateDropdownData();
         }
@@ -88,6 +89,31 @@ namespace WebApplication2
         protected void PackageCreatePackage_Click(object sender, EventArgs e)
         {
             AddNewPackagePanel.Visible = true;
+        }
+
+        protected void PackagesFindByTrack_Click(object sender, EventArgs e)
+        {
+            DataClasses1DataContext db = new DataClasses1DataContext();
+            if (PackagesFindByTrackBox.Text.Length == 0)
+            {
+                PackageFindInfo.Text = "Задан пустой запрос";
+                PackageFindInfo.Visible = true;
+                return;
+            }
+
+            int trackNumber = Convert.ToInt32(PackagesFindByTrackBox.Text);
+            var dd = (from p in db.Почтовые_отправления where p.номер_почтового_отправления == trackNumber select p);
+            int count = dd.Count();
+            if (count > 0)
+            {
+                GridView1.DataSource = dd;
+                GridView1.DataSourceID = "";
+                GridView1.DataBind();
+            } else
+            {
+                PackageFindInfo.Text = "К сожалению ничего не нашлось!";
+                PackageFindInfo.Visible = true;
+            }
         }
     }
 }
