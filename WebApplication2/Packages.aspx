@@ -39,7 +39,22 @@
                 <asp:BoundField DataField="куда" HeaderText="Куда" SortExpression="куда" />
                 <asp:BoundField DataField="дата_отправки" HeaderText="Дата отправки" SortExpression="дата_отправки" />
                 <asp:CheckBoxField DataField="выдана" HeaderText="Выдана" SortExpression="выдана" />
-                <asp:BoundField DataField="индификатор_склада" HeaderText="Склад" SortExpression="индификатор_склада" />
+                <asp:TemplateField HeaderText="Склад" SortExpression="индификатор_склада">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("индификатор_склада") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <HeaderTemplate>
+                        Функции
+                    </HeaderTemplate>
+                    <ItemTemplate>
+                        <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="LinqDataSource2" DataTextField="Адрес" DataValueField="индификатор_склада" Enabled="False" SelectedValue='<%# Bind("индификатор_склада", "{0}") %>'>
+                        </asp:DropDownList>
+                        <asp:LinqDataSource ID="LinqDataSource2" runat="server" ContextTypeName="WebApplication2.DataClasses1DataContext" EntityTypeName="" TableName="Склады">
+                        </asp:LinqDataSource>
+                        <asp:LinqDataSource ID="LinqDataSource1" runat="server" ContextTypeName="WebApplication2.DataClasses1DataContext" EntityTypeName="" TableName="Склады">
+                        </asp:LinqDataSource>
+                    </ItemTemplate>
+                </asp:TemplateField>
                 <asp:BoundField DataField="тип_отправления" HeaderText="Тип" SortExpression="тип_отправления" />
             </Columns>
             <EditRowStyle BackColor="#2461BF" />

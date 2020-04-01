@@ -5,16 +5,21 @@
     <div class="content">
         <h2>Сотрудники почты</h2>
 
-        <asp:GridView ID="GridView1" runat="server" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="номер_сотрудника" DataSourceID="LinqDataSource1" ForeColor="#333333" GridLines="None">
+        <asp:GridView ID="GridView1" runat="server" AllowSorting="True" ShowFooter="true" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="номер_сотрудника" DataSourceID="LinqDataSource1" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="GridView1_SelectedIndexChanged"  OnDataBound="GridView1_DataBound">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
                 <asp:BoundField DataField="номер_сотрудника" HeaderText="Номер" ReadOnly="True" SortExpression="номер_сотрудника" />
-                <asp:TemplateField HeaderText="Номер склада" SortExpression="индификатор_склада">
+                <asp:TemplateField HeaderText="Склад" SortExpression="индификатор_склада">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("индификатор_склада") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:Label ID="Label1" runat="server" Text='<%# Bind("индификатор_склада") %>'></asp:Label>
+                        <asp:DropDownList ID="WarehousesDropList" runat="server" DataSourceID="LinqDataSource2" DataTextField="Адрес" DataValueField="индификатор_склада" SelectedValue='<%# Bind("индификатор_склада", "{0}") %>' Enabled="False">
+                        </asp:DropDownList>
+                        <asp:LinqDataSource ID="LinqDataSource2" runat="server" ContextTypeName="WebApplication2.DataClasses1DataContext" EntityTypeName="" TableName="Склады">
+                        </asp:LinqDataSource>
+                        <asp:LinqDataSource ID="LinqDataSource1" runat="server" ContextTypeName="WebApplication2.DataClasses1DataContext" EntityTypeName="" TableName="Склады">
+                        </asp:LinqDataSource>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:BoundField DataField="ФИО" HeaderText="ФИО" SortExpression="ФИО" />
