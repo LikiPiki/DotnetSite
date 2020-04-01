@@ -36,6 +36,7 @@
         .auto-style7 {
             width: 100%;
             border-radius: 3px;
+            vertical-align: top;
         }
         .blue {
             background-color: #4287f5;
@@ -63,6 +64,13 @@
         }
         .auto-style11 {
             height: 124px;
+        }
+        .align-top {
+            vertical-align: top;
+            display: block;
+            width: 250px;
+            display: block;
+            height: 100%;
         }
     </style>
 </head>
@@ -126,7 +134,7 @@
             </td>
         </tr>
         <tr>
-            <td class="blue">
+            <td class="blue align-top">
                 <table class="auto-style7">
                     <tr>
                         <td class="full-width">
@@ -146,6 +154,19 @@
                         <tr>
                             <td>
                                 <asp:LinkButton class="menu-link" ID="LinkButton4" runat="server" OnClick="LinkButton4_Click">Почтовые отправления</asp:LinkButton>
+                            </td>
+                        </tr>
+                    <%
+                        }
+                    %>
+                    <%
+                        // Information about eployee only for admin
+                        if (Convert.ToInt32(Session["ROLE"]) == 1)
+                        {
+                    %>
+                        <tr>
+                            <td>
+                                <asp:LinkButton class="menu-link" ID="LinkButton3" runat="server" OnClick="LinkButton3_Click">Сотрудники почты</asp:LinkButton>
                             </td>
                         </tr>
                     <%

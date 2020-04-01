@@ -110,6 +110,11 @@ namespace WebApplication2
         {
             Response.Redirect("Packages.aspx");
         }
+
+        protected void LinkButton3_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Employees.aspx");
+        }
     }
 
 }

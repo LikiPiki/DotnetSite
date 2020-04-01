@@ -74,6 +74,7 @@
     <Content Include="Cabinet.aspx" />
     <Content Include="Index.aspx" />
     <Content Include="Packages.aspx" />
+    <Content Include="Employees.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataClasses1.designer.cs">
@@ -116,6 +117,13 @@
     </Compile>
     <Compile Include="Packages.aspx.designer.cs">
       <DependentUpon>Packages.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Employees.aspx.cs">
+      <DependentUpon>Employees.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Employees.aspx.designer.cs">
+      <DependentUpon>Employees.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

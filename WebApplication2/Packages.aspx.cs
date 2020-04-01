@@ -46,15 +46,17 @@ namespace WebApplication2
             {
                 try
                 {
-                    Почтовые_отправления myPackage = new Почтовые_отправления();
-                    myPackage.выдана = false;
-                    myPackage.дата_отправки = DateTime.Now;
-                    myPackage.кому = PackagesToBox.Text;
-                    myPackage.от_кого = PackagesFromBox.Text;
-                    myPackage.откуда = PackagesFromHere.Text;
-                    myPackage.куда = PackagesToHere.Text;
-                    myPackage.индификатор_склада = Convert.ToInt32(NewWarehouseNumber.SelectedValue);
-                    myPackage.тип_отправления = NewPackageType.SelectedValue;
+                    Почтовые_отправления myPackage = new Почтовые_отправления
+                    {
+                        выдана = false,
+                        дата_отправки = DateTime.Now,
+                        кому = PackagesToBox.Text,
+                        от_кого = PackagesFromBox.Text,
+                        откуда = PackagesFromHere.Text,
+                        куда = PackagesToHere.Text,
+                        индификатор_склада = Convert.ToInt32(NewWarehouseNumber.SelectedValue),
+                        тип_отправления = NewPackageType.SelectedValue
+                    };
                     db.Почтовые_отправления.InsertOnSubmit(myPackage);
                     db.SubmitChanges();
 
