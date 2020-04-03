@@ -62,6 +62,7 @@
       <Association Name="Извещения_Связующая" Member="Извещения" ThisKey="индификатор_извещения" OtherKey="идентификатор_извещения" Type="Извещения" IsForeignKey="true" />
       <Association Name="Почтовые_отправления_Связующая" Member="Почтовые_отправления" ThisKey="номер_почтового_отправления" OtherKey="номер_почтового_отправления" Type="Почтовые_отправления" IsForeignKey="true" />
       <Association Name="Сотрудники_Связующая" Member="Сотрудники" ThisKey="номер_сотрудника" OtherKey="номер_сотрудника" Type="Сотрудники" IsForeignKey="true" />
+      <Association Name="Геолокации_Связующая" Member="Геолокации" ThisKey="номер_геолокации" OtherKey="номер_геолокации" Type="Геолокации" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Склады" Member="Склады">
@@ -93,6 +94,15 @@
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="email" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
       <Association Name="users_tracks" Member="tracks" ThisKey="id" OtherKey="индификатор_пользователя" Type="tracks" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Геолокации" Member="Геолокации">
+    <Type Name="Геолокации">
+      <Column Name="номер_геолокации" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="текущее_местоположение" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="время_прибытия" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="почтовое_отправление" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Геолокации_Связующая" Member="Связующая" ThisKey="номер_геолокации" OtherKey="номер_геолокации" Type="Связующая" />
     </Type>
   </Table>
 </Database>

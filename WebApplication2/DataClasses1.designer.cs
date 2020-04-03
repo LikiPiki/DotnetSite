@@ -57,6 +57,9 @@ namespace WebApplication2
     partial void Insertusers(users instance);
     partial void Updateusers(users instance);
     partial void Deleteusers(users instance);
+    partial void InsertГеолокации(Геолокации instance);
+    partial void UpdateГеолокации(Геолокации instance);
+    partial void DeleteГеолокации(Геолокации instance);
     #endregion
 		
 		public DataClasses1DataContext() : 
@@ -158,6 +161,14 @@ namespace WebApplication2
 			get
 			{
 				return this.GetTable<users>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Геолокации> Геолокации
+		{
+			get
+			{
+				return this.GetTable<Геолокации>();
 			}
 		}
 	}
@@ -1226,6 +1237,8 @@ namespace WebApplication2
 		
 		private EntityRef<Сотрудники> _Сотрудники;
 		
+		private EntityRef<Геолокации> _Геолокации;
+		
     #region Определения метода расширяемости
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -1247,6 +1260,7 @@ namespace WebApplication2
 			this._Извещения = default(EntityRef<Извещения>);
 			this._Почтовые_отправления = default(EntityRef<Почтовые_отправления>);
 			this._Сотрудники = default(EntityRef<Сотрудники>);
+			this._Геолокации = default(EntityRef<Геолокации>);
 			OnCreated();
 		}
 		
@@ -1285,6 +1299,10 @@ namespace WebApplication2
 			{
 				if ((this._номер_геолокации != value))
 				{
+					if (this._Геолокации.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.Onномер_геолокацииChanging(value);
 					this.SendPropertyChanging();
 					this._номер_геолокации = value;
@@ -1460,6 +1478,40 @@ namespace WebApplication2
 						this._номер_сотрудника = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("Сотрудники");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Геолокации_Связующая", Storage="_Геолокации", ThisKey="номер_геолокации", OtherKey="номер_геолокации", IsForeignKey=true)]
+		public Геолокации Геолокации
+		{
+			get
+			{
+				return this._Геолокации.Entity;
+			}
+			set
+			{
+				Геолокации previousValue = this._Геолокации.Entity;
+				if (((previousValue != value) 
+							|| (this._Геолокации.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Геолокации.Entity = null;
+						previousValue.Связующая.Remove(this);
+					}
+					this._Геолокации.Entity = value;
+					if ((value != null))
+					{
+						value.Связующая.Add(this);
+						this._номер_геолокации = value.номер_геолокации;
+					}
+					else
+					{
+						this._номер_геолокации = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Геолокации");
 				}
 			}
 		}
@@ -2089,6 +2141,168 @@ namespace WebApplication2
 		{
 			this.SendPropertyChanging();
 			entity.users = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Геолокации")]
+	public partial class Геолокации : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _номер_геолокации;
+		
+		private string _текущее_местоположение;
+		
+		private System.Nullable<System.DateTime> _время_прибытия;
+		
+		private System.Nullable<int> _почтовое_отправление;
+		
+		private EntitySet<Связующая> _Связующая;
+		
+    #region Определения метода расширяемости
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onномер_геолокацииChanging(int value);
+    partial void Onномер_геолокацииChanged();
+    partial void Onтекущее_местоположениеChanging(string value);
+    partial void Onтекущее_местоположениеChanged();
+    partial void Onвремя_прибытияChanging(System.Nullable<System.DateTime> value);
+    partial void Onвремя_прибытияChanged();
+    partial void Onпочтовое_отправлениеChanging(System.Nullable<int> value);
+    partial void Onпочтовое_отправлениеChanged();
+    #endregion
+		
+		public Геолокации()
+		{
+			this._Связующая = new EntitySet<Связующая>(new Action<Связующая>(this.attach_Связующая), new Action<Связующая>(this.detach_Связующая));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_номер_геолокации", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int номер_геолокации
+		{
+			get
+			{
+				return this._номер_геолокации;
+			}
+			set
+			{
+				if ((this._номер_геолокации != value))
+				{
+					this.Onномер_геолокацииChanging(value);
+					this.SendPropertyChanging();
+					this._номер_геолокации = value;
+					this.SendPropertyChanged("номер_геолокации");
+					this.Onномер_геолокацииChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_текущее_местоположение", DbType="NVarChar(20)")]
+		public string текущее_местоположение
+		{
+			get
+			{
+				return this._текущее_местоположение;
+			}
+			set
+			{
+				if ((this._текущее_местоположение != value))
+				{
+					this.Onтекущее_местоположениеChanging(value);
+					this.SendPropertyChanging();
+					this._текущее_местоположение = value;
+					this.SendPropertyChanged("текущее_местоположение");
+					this.Onтекущее_местоположениеChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_время_прибытия", DbType="DateTime")]
+		public System.Nullable<System.DateTime> время_прибытия
+		{
+			get
+			{
+				return this._время_прибытия;
+			}
+			set
+			{
+				if ((this._время_прибытия != value))
+				{
+					this.Onвремя_прибытияChanging(value);
+					this.SendPropertyChanging();
+					this._время_прибытия = value;
+					this.SendPropertyChanged("время_прибытия");
+					this.Onвремя_прибытияChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_почтовое_отправление", DbType="Int")]
+		public System.Nullable<int> почтовое_отправление
+		{
+			get
+			{
+				return this._почтовое_отправление;
+			}
+			set
+			{
+				if ((this._почтовое_отправление != value))
+				{
+					this.Onпочтовое_отправлениеChanging(value);
+					this.SendPropertyChanging();
+					this._почтовое_отправление = value;
+					this.SendPropertyChanged("почтовое_отправление");
+					this.Onпочтовое_отправлениеChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Геолокации_Связующая", Storage="_Связующая", ThisKey="номер_геолокации", OtherKey="номер_геолокации")]
+		public EntitySet<Связующая> Связующая
+		{
+			get
+			{
+				return this._Связующая;
+			}
+			set
+			{
+				this._Связующая.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Связующая(Связующая entity)
+		{
+			this.SendPropertyChanging();
+			entity.Геолокации = this;
+		}
+		
+		private void detach_Связующая(Связующая entity)
+		{
+			this.SendPropertyChanging();
+			entity.Геолокации = null;
 		}
 	}
 }

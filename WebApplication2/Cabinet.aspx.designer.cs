@@ -87,6 +87,60 @@ namespace WebApplication2
         protected global::System.Web.UI.WebControls.Button CabinetAddTrackBtn;
 
         /// <summary>
+        /// CabitShowGeolocBtn элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button CabitShowGeolocBtn;
+
+        /// <summary>
+        /// CabinetPackageGeolocPanel элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel CabinetPackageGeolocPanel;
+
+        /// <summary>
+        /// CabitPackageAboutPackage элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label CabitPackageAboutPackage;
+
+        /// <summary>
+        /// CabinetPackageMoreGeoloc элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView CabinetPackageMoreGeoloc;
+
+        /// <summary>
+        /// LinqDataSource2 элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinqDataSource LinqDataSource2;
+
+        /// <summary>
+        /// CabitClosePackageGeolocPanel элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button CabitClosePackageGeolocPanel;
+
+        /// <summary>
         /// CabinetAddTrackInfo элемент управления.
         /// </summary>
         /// <remarks>

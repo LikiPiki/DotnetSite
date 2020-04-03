@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Cabinet.aspx.cs" Inherits="WebApplication2.WebForm2" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
     <style type="text/css">
-        .auto-style12.
+        .auto-style12,
         .auto-style13,
         .auto-style14 {
             width: 33%;
@@ -29,7 +29,7 @@
                     <asp:CheckBoxField DataField="выдана" HeaderText="Выдана" ReadOnly="True" SortExpression="выдана" />
                     <asp:BoundField DataField="тип_отправления" HeaderText="Тип" ReadOnly="True" SortExpression="тип_отправления" />
                     <asp:CommandField ShowSelectButton="True" HeaderText="Функции" >
-                    <ControlStyle CssClass="control-button" />
+                        <ControlStyle CssClass="control-button" />
                     </asp:CommandField>
                 </Columns>
                 <EditRowStyle BackColor="#7C6F57" />
@@ -71,14 +71,41 @@
                 </tr>
                 <tr>
                     <td colspan="3">
-                        <asp:Button ID="CabinetAddTrackBtn" runat="server" Text="Добавить в отслиживаемые" OnClick="CabinetAddTrackBtn_Click" />
+                        <asp:Button ID="CabinetAddTrackBtn" runat="server" Text="Добавить в отслиживаемые" OnClick="CabinetAddTrackBtn_Click" /> 
+                        <asp:Button ID="CabitShowGeolocBtn" runat="server" Text="Показать геолокацию посылки" OnClick="CabitShowGeolocBtn_Click" />
                     </td>
                 </tr>
                 <tr>
                     <td colspan="3">
-
+                        <asp:Panel ID="CabinetPackageGeolocPanel" runat="server" AutoGenerateColumns="False">
+                            <asp:Label ID="CabitPackageAboutPackage" runat="server" Text="Label"></asp:Label>
+                            <asp:GridView ID="CabinetPackageMoreGeoloc" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AllowPaging="True" AutoGenerateColumns="False" DataSourceID="LinqDataSource2">
+                                <AlternatingRowStyle BackColor="White" />
+                                <Columns>
+                                    <asp:BoundField DataField="текущее_местоположение" HeaderText="текущее_местоположение" ReadOnly="True" SortExpression="текущее_местоположение"/>
+                                    <asp:BoundField DataField="время_прибытия" HeaderText="время_прибытия" ReadOnly="True" SortExpression="время_прибытия"/>
+                                </Columns>
+                                <EditRowStyle BackColor="#7C6F57" />
+                                <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
+                                <HeaderStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
+                                <PagerStyle BackColor="#666666" ForeColor="White" HorizontalAlign="Center" />
+                                <RowStyle BackColor="#E3EAEB" />
+                                <SelectedRowStyle BackColor="#C5BBAF" Font-Bold="True" ForeColor="#333333" />
+                                <SortedAscendingCellStyle BackColor="#F8FAFA" />
+                                <SortedAscendingHeaderStyle BackColor="#246B61" />
+                                <SortedDescendingCellStyle BackColor="#D4DFE1" />
+                                <SortedDescendingHeaderStyle BackColor="#15524A" />
+                            </asp:GridView>
+                            <asp:LinqDataSource ID="LinqDataSource2" runat="server" ContextTypeName="WebApplication2.DataClasses1DataContext" EntityTypeName="" Select="new (текущее_местоположение, время_прибытия)" TableName="Геолокации">
+                            </asp:LinqDataSource>
+                            <br />
+                            <asp:Button ID="CabitClosePackageGeolocPanel" runat="server" Text="Закрыть" OnClick="CabitClosePackageGeolocPanel_Click" />
+                        </asp:Panel>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
                         <asp:Label ID="CabinetAddTrackInfo" runat="server" ForeColor="#003399" Text="Label"></asp:Label>
-
                     </td>
                 </tr>
             </table>

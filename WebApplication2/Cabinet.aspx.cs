@@ -13,6 +13,7 @@ namespace WebApplication2
         {
             CabinetAddTrackInfo.Visible = false;
             CabinetRemoveSuccessLabel.Visible = false;
+            CabinetPackageGeolocPanel.Visible = false;
 
             this.updateCabinetTracksTable();
         }
@@ -104,6 +105,29 @@ namespace WebApplication2
             }
             CabinetRemoveSuccessLabel.Visible = true;
             this.updateCabinetTracksTable();
+        }
+
+        protected void CabitShowGeolocBtn_Click(object sender, EventArgs e)
+        {
+            int idPackage = Convert.ToInt32(Session["IDG"]);
+            if (idPackage != 0) {
+                CabinetPackageGeolocPanel.Visible = true;
+                CabitPackageAboutPackage.Text = "Информация по отслеживанию посылки с треком " + idPackage;
+                DataClasses1DataContext db = new DataClasses1DataContext();
+                var dd = (from g in db.Геолокации where g.почтовое_отправление == idPackage select g);
+                CabinetPackageMoreGeoloc.DataSource = dd;
+                CabinetPackageMoreGeoloc.DataSourceID = "";
+                CabinetPackageMoreGeoloc.DataBind();
+            } else
+            {
+                CabinetAddTrackInfo.Text = "Вы не выбрали почтовое отправление в таблице выше!";
+                CabinetAddTrackInfo.Visible = true;
+            }
+        }
+
+        protected void CabitClosePackageGeolocPanel_Click(object sender, EventArgs e)
+        {
+            CabinetPackageGeolocPanel.Visible = false;
         }
     }
 }

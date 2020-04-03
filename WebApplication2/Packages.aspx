@@ -44,7 +44,7 @@
                         <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("индификатор_склада") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <HeaderTemplate>
-                        Функции
+                        Склад
                     </HeaderTemplate>
                     <ItemTemplate>
                         <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="LinqDataSource2" DataTextField="Адрес" DataValueField="индификатор_склада" Enabled="False" SelectedValue='<%# Bind("индификатор_склада", "{0}") %>'>
