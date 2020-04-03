@@ -169,6 +169,11 @@
                                 <asp:LinkButton class="menu-link" ID="LinkButton3" runat="server" OnClick="LinkButton3_Click">Сотрудники почты</asp:LinkButton>
                             </td>
                         </tr>
+                        <tr>
+                            <td>
+                                <asp:LinkButton class="menu-link" ID="LinkButton5" runat="server" OnClick="LinkButton5_Click">Пользователи и сотрудники</asp:LinkButton>
+                            </td>
+                        </tr>
                     <%
                         }
                     %>

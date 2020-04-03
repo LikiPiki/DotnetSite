@@ -115,6 +115,11 @@ namespace WebApplication2
         {
             Response.Redirect("Employees.aspx");
         }
+
+        protected void LinkButton5_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Users.aspx");
+        }
     }
 
 }

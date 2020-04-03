@@ -7,26 +7,20 @@ using System.Web.UI.WebControls;
 
 namespace WebApplication2
 {
-    public partial class WebForm5 : System.Web.UI.Page
+    public partial class WebForm6 : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
 
-        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+        protected void Users_DataBound(object sender, EventArgs e)
         {
-
-        }
-
-        protected void GridView1_DataBound(object sender, EventArgs e)
-        {
-            const int SALARY_INDEX = 4;
-            decimal salary = 0;
+            decimal count = 0;
 
             foreach (GridViewRow row in GridView1.Rows)
             {
-                salary += Decimal.Parse(row.Cells[SALARY_INDEX].Text);
+                count++;
             }
 
             GridViewRow footer = GridView1.FooterRow;
@@ -35,9 +29,9 @@ namespace WebApplication2
 
             footer.Cells.RemoveAt(1);
             footer.Cells.RemoveAt(2);
-            footer.Cells.RemoveAt(3);
 
-            footer.Cells[0].Text = "В один месяц выплат сотрудникам на сумму - " + Convert.ToString(salary) + " Рублей";
+            footer.Cells[0].Text = "Всего пользователей сервиса: " + Convert.ToString(count) + " человек";
         }
+
     }
 }
