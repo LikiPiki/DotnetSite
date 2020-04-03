@@ -1,5 +1,19 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Users.aspx.cs" Inherits="WebApplication2.WebForm6" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
+    <style type="text/css">
+        .auto-style12 {
+            width: 768px;
+        }
+        .auto-style13 {
+            width: 234px;
+        }
+        .auto-style14 {
+            width: 117px;
+        }
+        .auto-style15 {
+            width: 68px;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder3" runat="server">
      <div class="content">
@@ -7,6 +21,20 @@
             Пользователи сервиса
         </h2>
          <br />
+         <table class="auto-style12">
+             <tr>
+                 <td class="auto-style13">Поиск по логину пользователя:</td>
+                 <td class="auto-style14">
+                     <asp:TextBox ID="UsersFindUsersBox" runat="server"></asp:TextBox>
+                 </td>
+                 <td class="auto-style15">
+                     <asp:Button ID="UsersFindUsersBtn" runat="server" Text="Поиск" OnClick="UsersFindUsersBtn_Click" />
+                 </td>
+                 <td>
+                     <asp:Label ID="UsersFindInfoLabel" runat="server" Text="Label" ForeColor="Red"></asp:Label>
+                 </td>
+             </tr>
+         </table>
          <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="id" DataSourceID="LinqDataSource1" ForeColor="#333333" GridLines="None" ShowFooter="True" OnDataBound="Users_DataBound">
              <AlternatingRowStyle BackColor="White" />
              <Columns>

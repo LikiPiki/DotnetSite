@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Linq.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -11,7 +12,7 @@ namespace WebApplication2
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            UsersFindInfoLabel.Visible = false;
         }
 
         protected void Users_DataBound(object sender, EventArgs e)
@@ -33,5 +34,22 @@ namespace WebApplication2
             footer.Cells[0].Text = "Всего пользователей сервиса: " + Convert.ToString(count) + " человек";
         }
 
+        protected void UsersFindUsersBtn_Click(object sender, EventArgs e)      
+        {
+            DataClasses1DataContext db = new DataClasses1DataContext();
+
+            string loginTofind = UsersFindUsersBox.Text;
+            if (loginTofind != "")
+            {
+                var dd = (from u in db.users where SqlMethods.Like(u.username, loginTofind) select u);
+                GridView1.DataSource = dd;
+                GridView1.DataSourceID = "";
+                GridView1.DataBind();
+            } else
+            {
+                UsersFindInfoLabel.Text = "Задан поисковой запрос!";
+                UsersFindInfoLabel.Visible = true;
+            }
+        }
     }
 }

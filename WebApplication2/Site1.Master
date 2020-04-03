@@ -171,7 +171,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <asp:LinkButton class="menu-link" ID="LinkButton5" runat="server" OnClick="LinkButton5_Click">Пользователи и сотрудники</asp:LinkButton>
+                                <asp:LinkButton class="menu-link" ID="LinkButton5" runat="server" OnClick="LinkButton5_Click">Пользователи</asp:LinkButton>
                             </td>
                         </tr>
                     <%
