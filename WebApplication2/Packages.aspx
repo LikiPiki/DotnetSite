@@ -1,5 +1,19 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Packages.aspx.cs" Inherits="WebApplication2.WebForm4" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
+    <style type="text/css">
+        .auto-style12 {
+            width: 116px;
+        }
+        .auto-style13 {
+            width: 217px;
+        }
+        .auto-style15 {
+            width: 216px;
+        }
+        .auto-style16 {
+            width: 266px;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder3" runat="server">
     <div class="content">
@@ -83,6 +97,9 @@
                     <td>
                         <asp:Button ID="PackageCreatePackage" runat="server" Text="Создать отправление" Width="159px" OnClick="PackageCreatePackage_Click" />
                         <asp:Label ID="PackagesSubmitlabel" runat="server" Text="Label"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Button ID="Button1" runat="server" Text="Показать геолокации посылки" OnClick="Button1_Click" />
                     </td>
                 </tr>
             </table>       
@@ -180,10 +197,47 @@
                         <asp:Label ID="NewPackageInfoLabel" runat="server" Text="Label" ForeColor="Red"></asp:Label>
                     </td>
                 </tr>
-
             </table>
         </asp:Panel>
-
+        <asp:Panel ID="PackagesGeolocationPanel" runat="server">
+            <h2>Геолокация выбранного отправления:</h2>
+            <table>
+                <tr>
+                    <td colspan="3">
+                        <asp:GridView ID="PackageMoreGeolocations" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AllowPaging="True" AutoGenerateColumns="False" DataSourceID="LinqDataSource2">
+                                <AlternatingRowStyle BackColor="White" />
+                                <Columns>
+                                    <asp:BoundField DataField="текущее_местоположение" HeaderText="текущее_местоположение" ReadOnly="True" SortExpression="текущее_местоположение"/>
+                                    <asp:BoundField DataField="время_прибытия" HeaderText="время_прибытия" ReadOnly="True" SortExpression="время_прибытия"/>
+                                </Columns>
+                                <EditRowStyle BackColor="#7C6F57" />
+                                <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
+                                <HeaderStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
+                                <PagerStyle BackColor="#666666" ForeColor="White" HorizontalAlign="Center" />
+                                <RowStyle BackColor="#E3EAEB" />
+                                <SelectedRowStyle BackColor="#C5BBAF" Font-Bold="True" ForeColor="#333333" />
+                                <SortedAscendingCellStyle BackColor="#F8FAFA" />
+                                <SortedAscendingHeaderStyle BackColor="#246B61" />
+                                <SortedDescendingCellStyle BackColor="#D4DFE1" />
+                                <SortedDescendingHeaderStyle BackColor="#15524A" />
+                            </asp:GridView>
+                            <asp:LinqDataSource ID="LinqDataSource2" runat="server" ContextTypeName="WebApplication2.DataClasses1DataContext" EntityTypeName="" Select="new (текущее_местоположение, время_прибытия)" TableName="Геолокации">
+                            </asp:LinqDataSource>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="auto-style13">
+                        Добавить новую геолокацию</td>
+                    <td class="auto-style16">
+                        <asp:TextBox ID="PackagesAddGeolocationBox" runat="server" Width="187px"></asp:TextBox>
+                        <asp:Button ID="PackagesAddGeolocationNewBtn" runat="server" OnClick="Button2_Click" Text="Добавить" Width="64px" />
+                    </td>
+                    <td class="auto-style12">
+                        <asp:Label ID="PackagesAddGeolocationLabel" runat="server" ForeColor="Red" Text="Label"></asp:Label>
+                    </td>
+                </tr>
+            </table>
+        </asp:Panel>
         <br />
     </div>
 </asp:Content>

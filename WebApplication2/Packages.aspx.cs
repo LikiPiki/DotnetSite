@@ -14,6 +14,19 @@ namespace WebApplication2
             NewPackageInfoLabel.Visible = false;
             PackagesSubmitlabel.Visible = false;
             PackageFindInfo.Visible = false;
+            PackagesAddGeolocationLabel.Visible = false;
+
+
+
+            int selected = Convert.ToInt32(Session["SELECTED"]);
+            if (selected != 0)
+            {
+                PackagesGeolocationPanel.Visible = true;
+                this.updateLocations();
+            } else
+            {
+                PackagesGeolocationPanel.Visible = true;
+            }
 
             this.updateDropdownData();
         }
@@ -116,6 +129,75 @@ namespace WebApplication2
                 PackageFindInfo.Text = "К сожалению ничего не нашлось!";
                 PackageFindInfo.Visible = true;
             }
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            int selected = Convert.ToInt32(Session["SELECTED"]);
+
+            if (selected != 0)
+            {
+                DataClasses1DataContext db = new DataClasses1DataContext();
+                var dd = (from g in db.Геолокации where g.почтовое_отправление == selected select g);
+                PackageMoreGeolocations.DataSource = dd;
+                PackageMoreGeolocations.DataSourceID = "";
+                PackageMoreGeolocations.DataBind();
+
+                PackagesGeolocationPanel.Visible = true;
+            } else
+            {
+                PackagesSubmitlabel.Text = "Сначала выберите почтовое отправление";
+                PackagesSubmitlabel.Visible = true;
+            }
+        }
+
+        protected void updateLocations()
+        {
+            int selected = Convert.ToInt32(Session["SELECTED"]);
+
+            if (selected != 0)
+            {
+                DataClasses1DataContext db = new DataClasses1DataContext();
+                var dd = (from g in db.Геолокации where g.почтовое_отправление == selected select g);
+                PackageMoreGeolocations.DataSource = dd;
+                PackageMoreGeolocations.DataSourceID = "";
+                PackageMoreGeolocations.DataBind();
+            }
+        }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            string enteringText = PackagesAddGeolocationBox.Text;
+            int selected = Convert.ToInt32(Session["SELECTED"]);
+            DateTime dt = DateTime.Now;
+
+            if (enteringText != "")
+            {
+                try
+                {
+                    DataClasses1DataContext db = new DataClasses1DataContext();
+
+                    Геолокации geoloc = new Геолокации
+                    {
+                        почтовое_отправление = selected,
+                        текущее_местоположение = enteringText,
+                        время_прибытия = dt
+                    };
+                    db.Геолокации.InsertOnSubmit(geoloc);
+                    db.SubmitChanges();
+
+                    PackagesAddGeolocationLabel.Text = "Успешно добавлено!";
+                    this.updateLocations();
+                }
+                catch (Exception ex)
+                {
+                    PackagesAddGeolocationLabel.Text = ex.Message;
+                }
+            } else
+            {
+                PackagesAddGeolocationLabel.Text = "Ничего не введено!";
+            }
+            PackagesAddGeolocationLabel.Visible = true;
         }
     }
 }
